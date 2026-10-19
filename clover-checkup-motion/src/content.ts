@@ -7,7 +7,7 @@ export const clinic = {
   tagline: "건강검진센터",
   phone: "044-863-7975",
   phoneLabel: "예약문의",
-  closing: "풍부한 치료경험과 친절로 정성을 다하겠습니다",
+  closing: "풍부한 치료경험과 친절로\n정성을 다하겠습니다",
   closingSub: "개별 맞춤검사 상담이 가능합니다",
 };
 
@@ -43,7 +43,7 @@ export const programs: Program[] = [
     featured: true,
     items: [
       "기본신체계측",
-      "혈액종합검사 (암표지자 2종 포함)",
+      "혈액종합검사 (암표지자 2종)",
       "흉부방사선검사",
       "심전도검사",
       "위 + 대장 수면내시경",
@@ -56,7 +56,7 @@ export const programs: Program[] = [
     name: "다섯잎검진",
     items: [
       "기본신체계측",
-      "혈액종합검사 (암표지자 2종 포함)",
+      "혈액종합검사 (암표지자 2종)",
       "흉부방사선검사",
       "심전도검사",
       "골밀도검사",
@@ -104,7 +104,7 @@ export const equipment = {
     {
       icon: "💨",
       title: "최신형 CO₂ 주입기",
-      desc: "공기 대신 CO₂를 사용해 빠르게 흡수·배출 → 통증이 적고 편안한 검사",
+      desc: "공기 대신 CO₂ 사용, 빠르게 흡수·배출되어 통증이 적고 편안한 검사",
     },
   ],
 };

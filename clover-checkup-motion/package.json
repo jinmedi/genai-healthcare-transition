@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "remotion studio",
     "render": "remotion render CheckupPromo out/clover-checkup-promo.mp4",
-    "stills": "remotion render CheckupPromo out/frames --frames=60,180,420,720,960,1080 --image-format=png",
+    "stills": "remotion render CheckupPromo out/frames --frames=80,200,400,620,800,1050 --image-format=png",
     "typecheck": "tsc --noEmit",
     "skills:update": "remotion skills update"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.536",
     "@remotion/fonts": "4.0.536",
+    "@remotion/noise": "4.0.536",
     "@remotion/transitions": "4.0.536",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

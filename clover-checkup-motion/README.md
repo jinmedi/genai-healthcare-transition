@@ -3,21 +3,35 @@
 [Remotion](https://www.remotion.dev/)으로 만든 크로바내과 건강검진센터 홍보 영상입니다.
 영상의 글자·움직임·타이밍이 전부 코드라서, 문구를 고치고 다시 렌더하면 새 영상이 나옵니다.
 
-- 해상도: 1920 × 1080 (16:9), 30fps, 약 36초
+- 해상도: 1080 × 1920 (9:16 세로, 인스타그램 릴스·쇼츠·키오스크용), 30fps, 37초
 - 폰트: Noto Sans KR (프로젝트에 번들, 네트워크 없이 렌더)
+- 색상: 보라·코랄·시안·라임 계열의 선명한 그라데이션 팔레트 (`src/theme.ts`)
 
 ## 장면 구성
 
-| # | 장면 | 길이 | 내용 (출처) |
-|---|------|------|-------------|
-| 1 | 인트로 | 4s | 클로버 로고 + 크로바내과 건강검진센터 |
-| 2 | 핵심 메시지 | 4s | "증상이 없을 때가 검진의 적기입니다" |
-| 3 | 종합검진 프로그램 | 10s | 세잎 · 네잎 · 다섯잎검진 항목 (검진프로그램 포스터) |
-| 4 | 맞춤형 검사 | 7s | 유방 · 갑상선 · 간 · 뼈 · 치매 + 혈액종합검사 60여 종 (포스터) |
-| 5 | 내시경 장비 | 8s | 대학병원급 내시경, BLI·LCI 특수광, CO₂ 주입기 (장비 안내문) |
-| 6 | 예약 안내 | 6s | 예약문의 044-863-7975 |
+| # | 장면 | 길이 | 배경 | 내용 (출처) |
+|---|------|------|------|-------------|
+| 1 | 인트로 | 4.5s | 오로라 (보라→청록) | 네온 클로버 로고 + 파동 링 + 시머 타이틀 |
+| 2 | 핵심 메시지 | 4.5s | 선셋 (핑크→오렌지) | "증상이 없을 때가 검진의 적기입니다" |
+| 3 | 종합검진 프로그램 | 10s | 오션 (남색→청록) | 세잎 · 네잎(BEST) · 다섯잎검진 글라스 카드 (검진프로그램 포스터) |
+| 4 | 맞춤형 검사 | 7s | 그레이프 (보라→핑크) | 유방 · 갑상선 · 간 · 뼈 · 치매 네온 구슬 + 혈액종합검사 60여 종 |
+| 5 | 내시경 장비 | 8s | 일렉트릭 (남색→시안) | 소나 파동 · 스캔 라인 · BLI·LCI · CO₂ 주입기 (장비 안내문) |
+| 6 | 예약 안내 | 6.5s | 캔디 (보라→오렌지) | 컨페티 + 예약문의 044-863-7975 |
 
-장면 사이는 0.5초 페이드로 이어집니다.
+장면 전환: 슬라이드 → 와이프 → 슬라이드 → 클록 와이프 → 플립 → 페이드아웃 (각 0.7초).
+
+## 시각 효과 (`src/effects/`)
+
+| 컴포넌트 | 효과 |
+|----------|------|
+| `Background` | 그라데이션 + 노이즈로 떠다니는 컬러 블롭 (screen 블렌딩) |
+| `Particles` | 위로 떠오르며 반짝이는 입자 |
+| `ShimmerText` | 그라데이션 글자 위로 빛줄기가 지나가는 타이틀 |
+| `GlowRings` | 중심에서 퍼져 나가는 네온 파동 링 |
+| `GlassCard` | 반투명 유리 카드, 선택적 네온 그라데이션 테두리 |
+| `Confetti` | 흩날리며 떨어지는 색종이 |
+
+모든 효과는 프레임 번호와 결정적 난수(`random(seed)`)로만 움직여 매 렌더 결과가 동일합니다.
 
 ## 시작하기
 
@@ -38,18 +52,13 @@ Studio에서 장면별 컴포지션(`Scenes` 폴더)을 따로 열어 다듬을 
 - `customTests` — 맞춤형 검사 5종 (색상·부위·세부항목)
 - `equipment` — 내시경 장비 포인트 3개
 
-색상·폰트는 `src/theme.ts`, 장면 길이는 `src/CheckupVideo.tsx` 의 `SCENE_SECONDS` 에 있습니다.
+색상·그라데이션은 `src/theme.ts`, 장면 길이와 전환은 `src/CheckupVideo.tsx` 에 있습니다.
 
 ## MP4 렌더
 
 ```bash
 npm run render     # → out/clover-checkup-promo.mp4
-```
-
-장면별 스틸 확인:
-
-```bash
-npm run stills     # → out/frames/element-XXXX.png
+npm run stills     # 장면별 스틸 → out/frames/element-XXXX.png
 ```
 
 ### Chromium이 이미 설치된 환경 (클라우드 세션 등)
@@ -68,9 +77,10 @@ src/
   Root.tsx            컴포지션 등록 (전체 영상 + 장면별)
   CheckupVideo.tsx    장면 순서·길이·전환
   content.ts          문구·항목·연락처 (여기만 고치면 됨)
-  theme.ts            색상·폰트
+  theme.ts            색상·그라데이션·폰트
   anim.ts             공통 등장 애니메이션 (fadeUp, popIn, slideInX)
-  components/Clover.tsx   CSS 클로버 로고, 잎 개수 배지
+  components/Clover.tsx   CSS 네온 클로버 로고, 잎 개수 배지
+  effects/            Background · Particles · ShimmerText · GlowRings · GlassCard · Confetti
   scenes/             Intro · Hook · Programs · CustomTests · Equipment · Outro
 public/fonts/         Noto Sans KR (OFL, 한글+라틴 서브셋 woff2)
 .agents/skills/       Remotion 공식 Agent Skills (npx remotion skills update 로 갱신)
@@ -84,6 +94,6 @@ public/fonts/         Noto Sans KR (OFL, 한글+라틴 서브셋 woff2)
 
 ## 다음 단계 (아이디어)
 
-- 9:16 세로(인스타그램·키오스크) 버전 컴포지션 추가
-- 배경음악·내레이션 추가 (`@remotion/media`)
+- 배경음악·효과음·내레이션 추가 (`@remotion/media`)
 - 장비 사진(내시경·CO₂ 주입기) 이미지 삽입 (`public/` + `<CanvasImage>`)
+- 16:9 가로(대기실 TV) 버전 컴포지션 추가

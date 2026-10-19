@@ -12,26 +12,31 @@ export const fontLoaded = loadFont({
   display: "block",
 });
 
-// 크로바(클로버) 브랜드 컬러
+// 선명한 그라데이션 팔레트 (포스터 색상과 무관한 새 톤)
 export const colors = {
-  green900: "#0f4d2e",
-  green700: "#1f7a4d",
-  green500: "#2ea56b",
-  green300: "#8fd9b3",
-  mint100: "#e8f7ef",
-  cream: "#fbfaf5",
-  ink: "#10231a",
-  inkSoft: "#4d6358",
-  accent: "#f5b942",
+  violet900: "#1a0b3d",
+  indigo: "#2d1b8a",
+  purple: "#7c3aed",
+  magenta: "#ff3df2",
+  coral: "#ff5c7a",
+  orange: "#ff8a3d",
+  yellow: "#ffd23f",
+  lime: "#c8ff3d",
+  cyan: "#39e5ff",
+  teal: "#0fd9a8",
+  navy: "#061a2e",
   white: "#ffffff",
-  navy900: "#0b1530",
-  navy700: "#15264d",
-  sky: "#7cc4ff",
+  ink: "#120a2a",
 } as const;
 
-export const greenGradient =
-  "linear-gradient(135deg, #0f4d2e 0%, #1f7a4d 60%, #2ea56b 100%)";
-export const navyGradient =
-  "linear-gradient(135deg, #0b1530 0%, #15264d 55%, #1c3a6b 100%)";
-export const creamGradient =
-  "radial-gradient(1200px 800px at 20% 20%, #e8f7ef 0%, #fbfaf5 60%)";
+export const gradients = {
+  aurora: "linear-gradient(160deg, #1a0b3d 0%, #4c1d95 45%, #0e7490 100%)",
+  sunset: "linear-gradient(160deg, #ff2d7a 0%, #ff6a3d 55%, #ffb13d 100%)",
+  ocean: "linear-gradient(170deg, #061a2e 0%, #0b3d5c 55%, #0fd9a8 135%)",
+  grape: "linear-gradient(160deg, #2b0a5e 0%, #6d28d9 50%, #db2777 100%)",
+  electric: "linear-gradient(180deg, #020b1f 0%, #0b2a6b 60%, #0891b2 135%)",
+  candy: "linear-gradient(160deg, #4c1d95 0%, #db2777 50%, #f97316 100%)",
+  limeCyan: "linear-gradient(90deg, #c8ff3d, #39e5ff)",
+  pinkYellow: "linear-gradient(90deg, #ff3df2, #ffd23f)",
+  cyanMagenta: "linear-gradient(90deg, #39e5ff, #ff3df2)",
+} as const;

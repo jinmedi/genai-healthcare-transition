@@ -9,8 +9,8 @@ import { Equipment } from "./scenes/Equipment";
 import { Outro } from "./scenes/Outro";
 
 const FPS = 30;
-const WIDTH = 1920;
-const HEIGHT = 1080;
+const WIDTH = 1080;
+const HEIGHT = 1920;
 
 export const RemotionRoot: React.FC = () => {
   return (

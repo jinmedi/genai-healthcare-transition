@@ -1,28 +1,37 @@
 import React from "react";
 import { Easing, Interactive, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { Clover } from "../components/Clover";
+import { Background } from "../effects/Background";
+import { Confetti } from "../effects/Confetti";
+import { GlowRings } from "../effects/GlowRings";
+import { ShimmerText } from "../effects/ShimmerText";
 import { fadeUp, popIn } from "../anim";
-import { colors, creamGradient, font } from "../theme";
+import { colors, font, gradients } from "../theme";
 import { clinic } from "../content";
-import { Blob } from "./Intro";
 
 const OutroInner: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // 전화번호 강조 펄스 (2.4초부터 3회)
+  // 전화번호 강조 펄스 (2.2초부터 3회)
   const pulse = interpolate(
     frame,
-    [2.4 * fps, 2.9 * fps, 3.4 * fps, 3.9 * fps, 4.4 * fps, 4.9 * fps, 5.4 * fps],
-    [1, 1.04, 1, 1.04, 1, 1.04, 1],
+    [2.2 * fps, 2.7 * fps, 3.2 * fps, 3.7 * fps, 4.2 * fps, 4.7 * fps, 5.2 * fps],
+    [1, 1.05, 1, 1.05, 1, 1.05, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.sin) },
   );
 
   return (
     <>
-      <div style={{ position: "absolute", inset: 0, background: creamGradient }} />
-      <Blob left={-200} top={-220} size={620} color={colors.green300} opacity={0.35} />
-      <Blob right={-120} bottom={-160} size={420} color={colors.accent} opacity={0.18} />
+      <Background
+        gradient={gradients.candy}
+        blobs={[
+          { color: colors.cyan, size: 900, x: 0.1, y: 0.15, seed: "o1" },
+          { color: colors.yellow, size: 900, x: 0.9, y: 0.4, seed: "o2" },
+          { color: colors.lime, size: 700, x: 0.5, y: 0.95, seed: "o3", opacity: 0.6 },
+        ]}
+      />
+      <Confetti colors={[colors.lime, colors.cyan, colors.yellow, colors.white, colors.magenta]} count={80} />
 
       <div
         style={{
@@ -33,17 +42,26 @@ const OutroInner: React.FC = () => {
           alignItems: "center",
           justifyContent: "center",
           fontFamily: font,
+          color: colors.white,
           textAlign: "center",
+          padding: "0 70px",
         }}
       >
-        <Clover size={130} delaySec={0.1} />
+        <div style={{ position: "relative", width: 260, height: 260, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <GlowRings color={colors.lime} size={200} period={2.2} spread={2.2} delaySec={0.5} />
+          <Clover size={170} delaySec={0.1} glow={colors.lime} />
+        </div>
+
         <div
           style={{
-            marginTop: 24,
-            fontSize: 64,
+            marginTop: 30,
+            fontSize: 62,
             fontWeight: 900,
             letterSpacing: "-0.03em",
-            color: colors.green900,
+            lineHeight: 1.25,
+            wordBreak: "keep-all",
+            whiteSpace: "pre-line",
+            textShadow: "0 10px 40px rgba(0,0,0,.3)",
             ...fadeUp(frame, fps, 0.6),
           }}
         >
@@ -51,58 +69,64 @@ const OutroInner: React.FC = () => {
         </div>
         <div
           style={{
-            marginTop: 10,
+            marginTop: 16,
             fontSize: 34,
             fontWeight: 500,
-            color: colors.inkSoft,
+            color: "rgba(255,255,255,.85)",
             ...fadeUp(frame, fps, 0.9, 0.6, 30),
           }}
         >
           {clinic.closingSub}
         </div>
 
-        <div
-          style={{
-            marginTop: 48,
-            display: "flex",
-            alignItems: "center",
-            gap: 28,
-            background: colors.green700,
-            color: colors.white,
-            borderRadius: 44,
-            padding: "18px 64px 18px 44px",
-            boxShadow: "0 24px 60px rgba(15, 77, 46, .3)",
-            ...popIn(frame, fps, 1.3),
-            scale: String(
-              Number(popIn(frame, fps, 1.3).scale ?? 1) * pulse,
-            ),
-          }}
-        >
+        <div style={{ position: "relative", marginTop: 70 }}>
+          <GlowRings color={colors.yellow} size={520} count={2} period={2.6} spread={1.6} thickness={2} delaySec={1.6} />
           <div
             style={{
-              fontSize: 30,
-              fontWeight: 700,
-              letterSpacing: "0.06em",
-              padding: "8px 18px",
-              borderRadius: 999,
-              background: colors.accent,
-              color: colors.green900,
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 14,
+              background: "rgba(255,255,255,.14)",
+              border: "2px solid rgba(255,255,255,.5)",
+              backdropFilter: "blur(18px)",
+              borderRadius: 48,
+              padding: "30px 60px 36px",
+              boxShadow: `0 0 70px ${colors.yellow}88, 0 30px 70px rgba(0,0,0,.3)`,
+              ...popIn(frame, fps, 1.3),
+              scale: String(Number(popIn(frame, fps, 1.3).scale ?? 1) * pulse),
             }}
           >
-            {clinic.phoneLabel}
-          </div>
-          <div style={{ fontSize: 108, fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-            {clinic.phone}
+            <div
+              style={{
+                fontSize: 28,
+                fontWeight: 900,
+                letterSpacing: "0.14em",
+                padding: "8px 22px",
+                borderRadius: 999,
+                background: gradients.pinkYellow,
+                color: colors.ink,
+              }}
+            >
+              {clinic.phoneLabel}
+            </div>
+            <ShimmerText
+              colors={[colors.white, colors.yellow]}
+              period={2}
+              style={{ fontSize: 104, fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.1 }}
+            >
+              {clinic.phone}
+            </ShimmerText>
           </div>
         </div>
 
         <div
           style={{
-            marginTop: 40,
+            marginTop: 70,
             fontSize: 40,
             fontWeight: 700,
-            letterSpacing: "0.02em",
-            color: colors.green900,
+            letterSpacing: "0.08em",
             ...fadeUp(frame, fps, 1.9, 0.6, 20),
           }}
         >

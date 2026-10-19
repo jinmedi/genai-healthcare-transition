@@ -1,10 +1,13 @@
 import React from "react";
 import { Interactive, useCurrentFrame, useVideoConfig } from "remotion";
 import { LeafBadge } from "../components/Clover";
+import { Background } from "../effects/Background";
+import { Particles } from "../effects/Particles";
+import { GlassCard } from "../effects/GlassCard";
+import { ShimmerText } from "../effects/ShimmerText";
 import { fadeUp, popIn } from "../anim";
-import { colors, creamGradient, font } from "../theme";
+import { colors, font, gradients } from "../theme";
 import { programs } from "../content";
-import { Blob } from "./Intro";
 
 const ProgramsInner: React.FC = () => {
   const frame = useCurrentFrame();
@@ -12,9 +15,15 @@ const ProgramsInner: React.FC = () => {
 
   return (
     <>
-      <div style={{ position: "absolute", inset: 0, background: creamGradient }} />
-      <Blob left={-200} top={-220} size={620} color={colors.green300} opacity={0.3} />
-      <Blob right={-120} bottom={-160} size={420} color={colors.accent} opacity={0.15} />
+      <Background
+        gradient={gradients.ocean}
+        blobs={[
+          { color: colors.cyan, size: 900, x: 0.9, y: 0.1, seed: "p1" },
+          { color: colors.lime, size: 800, x: 0.1, y: 0.55, seed: "p2", opacity: 0.6 },
+          { color: colors.purple, size: 900, x: 0.7, y: 0.95, seed: "p3" },
+        ]}
+      />
+      <Particles count={40} colors={[colors.cyan, colors.lime, colors.white]} seed="prog" speed={30} />
 
       <div
         style={{
@@ -25,119 +34,124 @@ const ProgramsInner: React.FC = () => {
           alignItems: "center",
           justifyContent: "center",
           fontFamily: font,
-          paddingTop: 20,
+          color: colors.white,
+          padding: "0 70px",
         }}
       >
         <div
           style={{
-            fontSize: 84,
+            fontSize: 26,
             fontWeight: 900,
-            letterSpacing: "-0.03em",
-            color: colors.green900,
-            marginBottom: 44,
-            ...fadeUp(frame, fps, 0.2),
+            letterSpacing: "0.3em",
+            color: colors.cyan,
+            ...fadeUp(frame, fps, 0.1, 0.6, 20),
           }}
         >
-          크로바 <span style={{ color: colors.green500 }}>종합검진</span> 프로그램
+          CLOVER CHECK-UP
         </div>
+        <ShimmerText
+          colors={[colors.white, colors.lime]}
+          style={{
+            marginTop: 10,
+            marginBottom: 44,
+            fontSize: 92,
+            fontWeight: 900,
+            letterSpacing: "-0.03em",
+            ...fadeUp(frame, fps, 0.25),
+          }}
+        >
+          종합검진 프로그램
+        </ShimmerText>
 
-        <div style={{ display: "flex", gap: 36, alignItems: "stretch" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 26, width: "100%" }}>
           {programs.map((p, i) => {
-            const delay = 0.6 + i * 0.3;
+            const delay = 0.7 + i * 0.45;
             const featured = p.featured === true;
             return (
-              <div
-                key={p.name}
-                style={{
-                  width: 540,
-                  background: featured ? colors.green700 : colors.white,
-                  color: featured ? colors.white : colors.ink,
-                  borderRadius: 32,
-                  boxShadow: featured
-                    ? "0 28px 70px rgba(15, 77, 46, .35)"
-                    : "0 18px 50px rgba(15, 77, 46, .12)",
-                  padding: "40px 44px 36px",
-                  display: "flex",
-                  flexDirection: "column",
-                  ...popIn(frame, fps, delay),
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-                  <LeafBadge
-                    count={p.leaves}
-                    size={26}
-                    color={featured ? colors.green300 : colors.green500}
-                  />
-                  <div
-                    style={{
-                      marginLeft: "auto",
-                      fontSize: 22,
-                      fontWeight: 700,
-                      letterSpacing: "0.08em",
-                      opacity: 0.7,
-                    }}
-                  >
-                    크로바
-                  </div>
-                </div>
-                <div
-                  style={{
-                    fontSize: 60,
-                    fontWeight: 900,
-                    letterSpacing: "-0.02em",
-                    marginTop: 14,
-                    marginBottom: 22,
-                  }}
+              <div key={p.name} style={{ ...popIn(frame, fps, delay, 0.7) }}>
+                <GlassCard
+                  glowBorder={featured ? gradients.limeCyan : undefined}
+                  glowColor={featured ? colors.lime : undefined}
+                  padding="30px 38px 26px"
+                  innerStyle={featured ? { background: "rgba(10, 40, 60, .55)" } : undefined}
                 >
-                  {p.name}
-                </div>
-                <div
-                  style={{
-                    height: 3,
-                    background: featured ? "rgba(255,255,255,.3)" : colors.mint100,
-                    marginBottom: 22,
-                  }}
-                />
-                <div style={{ display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-                  {p.items.map((item, j) => (
-                    <div
-                      key={item}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 14,
-                        fontSize: 30,
-                        fontWeight: 500,
-                        lineHeight: 1.3,
-                        ...fadeUp(frame, fps, delay + 0.35 + j * 0.1, 0.5, 20),
-                      }}
-                    >
+                  <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                    <LeafBadge count={p.leaves} size={24} color={featured ? colors.lime : colors.cyan} />
+                    <div style={{ fontSize: 54, fontWeight: 900, letterSpacing: "-0.02em", marginLeft: 6 }}>
+                      {p.name}
+                    </div>
+                    {featured ? (
                       <div
                         style={{
-                          width: 12,
-                          height: 12,
-                          borderRadius: 6,
-                          flexShrink: 0,
-                          background: featured ? colors.accent : colors.green500,
+                          marginLeft: "auto",
+                          padding: "8px 18px",
+                          borderRadius: 999,
+                          background: gradients.pinkYellow,
+                          color: colors.ink,
+                          fontSize: 24,
+                          fontWeight: 900,
+                          letterSpacing: "0.1em",
+                          boxShadow: `0 0 24px ${colors.magenta}`,
                         }}
-                      />
-                      {item}
-                    </div>
-                  ))}
-                </div>
-                {p.note ? (
+                      >
+                        BEST
+                      </div>
+                    ) : null}
+                  </div>
+
                   <div
                     style={{
-                      marginTop: 22,
-                      fontSize: 21,
-                      lineHeight: 1.4,
-                      opacity: 0.75,
-                      ...fadeUp(frame, fps, delay + 1.2, 0.5, 10),
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      columnGap: 20,
+                      rowGap: 10,
+                      marginTop: 20,
                     }}
                   >
-                    {p.note}
+                    {p.items.map((item, j) => (
+                      <div
+                        key={item}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 12,
+                          fontSize: 27,
+                          fontWeight: 500,
+                          lineHeight: 1.3,
+                          wordBreak: "keep-all",
+                          ...fadeUp(frame, fps, delay + 0.3 + j * 0.08, 0.45, 16),
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: 10,
+                            height: 10,
+                            borderRadius: 5,
+                            flexShrink: 0,
+                            background: featured ? colors.lime : colors.cyan,
+                            boxShadow: `0 0 10px ${featured ? colors.lime : colors.cyan}`,
+                          }}
+                        />
+                        {item}
+                      </div>
+                    ))}
                   </div>
-                ) : null}
+
+                  {p.note ? (
+                    <div
+                      style={{
+                        marginTop: 16,
+                        fontSize: 22,
+                        lineHeight: 1.4,
+                        color: "rgba(255,255,255,.75)",
+                        wordBreak: "keep-all",
+                        ...fadeUp(frame, fps, delay + 1.0, 0.5, 10),
+                      }}
+                    >
+                      {p.note}
+                    </div>
+                  ) : null}
+                </GlassCard>
               </div>
             );
           })}
