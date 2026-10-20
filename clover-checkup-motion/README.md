@@ -101,6 +101,7 @@ public/fonts/         Noto Sans KR (OFL, 한글+라틴 서브셋 woff2)
 ```bash
 npm run render:wife   # → out/clover-wife-promo-1x1.mp4
 npm run stills:wife   # 씬별 스틸 → out/wife/
+npm run concat        # 두 영상 합본 → out/clover-promo-combined-1x1.mp4 (79초, 재인코딩 없음)
 ```
 
 폰트 추가: Pretendard (OFL, `public/fonts/Pretendard-OFL.txt`), Nanum Pen Script (OFL, `public/fonts/NanumPenScript-OFL.txt`). 둘 다 한글+라틴 서브셋 woff2.
