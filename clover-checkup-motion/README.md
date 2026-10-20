@@ -87,6 +87,23 @@ public/fonts/         Noto Sans KR (OFL, 한글+라틴 서브셋 woff2)
 .agents/skills/       Remotion 공식 Agent Skills (npx remotion skills update 로 갱신)
 ```
 
+## 캐주얼 버전: 남편의 아내 자랑 (`WifePromo`)
+
+같은 저장소 안의 두 번째 영상입니다. 남편이 1인칭으로 아내(정지현 대표원장)를 자랑하는 고백 자막형이고, 원내 대기실 상영용입니다.
+기획안: https://claude.ai/code/artifact/497645ee-9e48-497f-acdb-26f5c3ea431c
+
+- 1000 × 1000, 30fps, 42초, 9개 씬, 0.4초 페이드 전환
+- 노트 톤: 크림색 종이 질감, 타자기 자막(프리텐다드), 형광펜 강조, 손글씨 메모(나눔손글씨 펜), 손그림 라인 일러스트
+- 대본은 `src/wife/script.ts` 한 곳에서 수정. `hl: true` 조각이 형광펜 강조
+- 구조: `src/wife/` — `script.ts` 대본 · `noteTheme.ts` 팔레트·폰트 · `components/` Paper·Caption·Handwriting·Doodles · `scenes.tsx` 씬 9개 · `WifePromo.tsx` 조립
+
+```bash
+npm run render:wife   # → out/clover-wife-promo-1x1.mp4
+npm run stills:wife   # 씬별 스틸 → out/wife/
+```
+
+폰트 추가: Pretendard (OFL, `public/fonts/Pretendard-OFL.txt`), Nanum Pen Script (OFL, `public/fonts/NanumPenScript-OFL.txt`). 둘 다 한글+라틴 서브셋 woff2.
+
 ## 라이선스 안내
 
 - Remotion은 개인 및 **3인 이하 회사**는 무료, 4인 이상 회사는 유료 라이선스가 필요합니다.

@@ -7,7 +7,9 @@
     "render": "remotion render CheckupPromo out/clover-checkup-promo-1x1.mp4",
     "stills": "remotion render CheckupPromo out/frames --frames=80,200,400,620,800,1050 --image-format=png",
     "typecheck": "tsc --noEmit",
-    "skills:update": "remotion skills update"
+    "skills:update": "remotion skills update",
+    "render:wife": "remotion render WifePromo out/clover-wife-promo-1x1.mp4",
+    "stills:wife": "remotion render WifePromo out/wife --frames=95,230,410,560,710,860,980,1130,1255 --image-format=png"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.536",

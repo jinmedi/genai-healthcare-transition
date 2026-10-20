@@ -7,6 +7,9 @@ import { Programs } from "./scenes/Programs";
 import { CustomTests } from "./scenes/CustomTests";
 import { Equipment } from "./scenes/Equipment";
 import { Outro } from "./scenes/Outro";
+import { WifePromo, wifeDurationInFrames } from "./wife/WifePromo";
+import { W1, W2, W3, W4, W5, W6, W7, W8, W9 } from "./wife/scenes";
+import { SCENE_SECONDS as WIFE_SECONDS } from "./wife/script";
 
 const FPS = 30;
 const WIDTH = 1000;
@@ -23,6 +26,29 @@ export const RemotionRoot: React.FC = () => {
         width={WIDTH}
         height={HEIGHT}
       />
+
+      {/* 캐주얼 버전: 남편의 아내 자랑 (노트 톤, 타자기 자막) */}
+      <Composition
+        id="WifePromo"
+        component={WifePromo}
+        durationInFrames={wifeDurationInFrames(FPS)}
+        fps={FPS}
+        width={WIDTH}
+        height={HEIGHT}
+      />
+      <Folder name="WifeScenes">
+        {[W1, W2, W3, W4, W5, W6, W7, W8, W9].map((Scene, i) => (
+          <Composition
+            key={`W${i + 1}`}
+            id={`W${i + 1}`}
+            component={Scene}
+            durationInFrames={Math.round(WIFE_SECONDS[i] * FPS)}
+            fps={FPS}
+            width={WIDTH}
+            height={HEIGHT}
+          />
+        ))}
+      </Folder>
 
       {/* 씬별로 따로 열어 다듬을 수 있는 연결 컴포지션 */}
       <Folder name="Scenes">
