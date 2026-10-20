@@ -21,6 +21,8 @@ export const scenes = {
   },
   s2: {
     line: [{ t: "아내가 " }, { t: "손이 참 좋아요", hl: true }, { t: "." }] as Line,
+    photo: "photos/wife-hand.jpg",
+    photoCaption: "아내 손",
   },
   s3: {
     line: [
@@ -47,7 +49,9 @@ export const scenes = {
       { t: "아내한테 받습니다", hl: true },
       { t: "." },
     ] as Line,
-    note: "(사실 좀 무서워요.)",
+    note: "(사실 좀\n무서워요.)",
+    photo: "photos/husband.jpg",
+    photoCaption: "남편 (본인)",
   },
   s6: {
     line: [{ t: "그런 아내가 " }, { t: "세종", hl: true }, { t: "에서\n크로바내과를 합니다." }] as Line,
@@ -72,6 +76,8 @@ export const scenes = {
   s9: {
     line: [{ t: "아내 자랑이 " }, { t: "좀", hl: true }, { t: " 심했나요?" }] as Line,
     line2: [{ t: "진짜인지, 아닌지,\n" }, { t: "직접 확인해 보세요", hl: true }, { t: "." }] as Line,
+    photo: "photos/husband.jpg",
+    photoCaption: "자랑이 심했나요?",
   },
 };
 

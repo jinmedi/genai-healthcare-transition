@@ -3,12 +3,12 @@ import { Easing, Interactive, interpolate, useCurrentFrame, useVideoConfig } fro
 import { Paper } from "./components/Paper";
 import { Caption } from "./components/Caption";
 import { Handwriting } from "./components/Handwriting";
+import { Polaroid, SweatSticker } from "./components/Polaroid";
 import {
   Bubble,
   CalendarDoodle,
   CloverDoodle,
   DeskDoodle,
-  HandDoodle,
   Magnifier,
   PersonDoodle,
   PinDoodle,
@@ -76,19 +76,15 @@ export const W1 = Interactive.create({ Component: W1Inner, layout: "absolute-fil
 /* ---------- 씬 2: 손이 참 좋아요 ---------- */
 const W2Inner: React.FC = () => (
   <Stage>
-    <Art top={60} height={470}>
-      <div style={{ position: "relative", width: 420, height: 420 }}>
-        <div style={{ position: "absolute", left: 60, top: 40 }}>
-          <HandDoodle delaySec={0.3} size={340} />
-        </div>
-        <Sparkle x={40} y={70} delaySec={1.5} size={44} />
-        <Sparkle x={330} y={30} delaySec={1.8} size={34} />
-        <Sparkle x={370} y={250} delaySec={2.1} size={40} />
-        <Sparkle x={20} y={300} delaySec={2.4} size={30} />
-      </div>
-    </Art>
-    <Text top={600}>
-      <Caption line={scenes.s2.line} delaySec={0.6} size={62} weight={700} />
+    <div style={{ position: "absolute", left: 300, top: 60 }}>
+      <Polaroid src={scenes.s2.photo} caption={scenes.s2.photoCaption} delaySec={0.3} rotate={-4} />
+    </div>
+    <Sparkle x={230} y={110} delaySec={1.5} size={44} />
+    <Sparkle x={730} y={60} delaySec={1.8} size={34} />
+    <Sparkle x={760} y={420} delaySec={2.1} size={40} />
+    <Sparkle x={200} y={470} delaySec={2.4} size={30} />
+    <Text top={640}>
+      <Caption line={scenes.s2.line} delaySec={0.9} size={62} weight={700} />
     </Text>
   </Stage>
 );
@@ -186,20 +182,17 @@ export const W4 = Interactive.create({ Component: W4Inner, layout: "absolute-fil
 /* ---------- 씬 5: 저도 아내한테 받습니다 ---------- */
 const W5Inner: React.FC = () => (
   <Stage>
-    <Art top={50} height={460}>
-      <div style={{ position: "relative", width: 520, height: 420 }}>
-        <div style={{ position: "absolute", left: 150, top: 20 }}>
-          <Pop delaySec={0.3}>
-            <PersonDoodle size={220} glasses sweat mouth="worried" gown="#E9F3EC" />
-          </Pop>
-        </div>
-        <div style={{ position: "absolute", left: 380, top: 120 }}>
-          <Handwriting delaySec={2.9} size={46} rotate={6} color={note.coral}>
-            {scenes.s5.note}
-          </Handwriting>
-        </div>
-      </div>
-    </Art>
+    <div style={{ position: "absolute", left: 330, top: 60 }}>
+      <Polaroid src={scenes.s5.photo} caption={scenes.s5.photoCaption} width={300} photoHeight={330} rotate={3} delaySec={0.3} position="50% 12%" />
+    </div>
+    <div style={{ position: "absolute", left: 650, top: 100 }}>
+      <SweatSticker delaySec={2.4} size={72} />
+    </div>
+    <div style={{ position: "absolute", left: 690, top: 230 }}>
+      <Handwriting delaySec={2.9} size={46} rotate={6} color={note.coral}>
+        {scenes.s5.note}
+      </Handwriting>
+    </div>
     <Text top={560}>
       <Caption line={scenes.s5.line} delaySec={0.6} size={52} />
     </Text>
@@ -352,12 +345,10 @@ export const W8 = Interactive.create({ Component: W8Inner, layout: "absolute-fil
 /* ---------- 씬 9: 아내 자랑이 좀 심했나요? ---------- */
 const W9Inner: React.FC = () => (
   <Stage>
-    <Art top={40} height={380}>
-      <Pop delaySec={0.2}>
-        <PersonDoodle size={200} glasses blush mouth="smile" gown="#E9F3EC" />
-      </Pop>
-    </Art>
-    <Text top={440}>
+    <div style={{ position: "absolute", left: 350, top: 50 }}>
+      <Polaroid src={scenes.s9.photo} caption={scenes.s9.photoCaption} width={280} photoHeight={300} rotate={-2} delaySec={0.2} position="50% 12%" />
+    </div>
+    <Text top={450}>
       <Caption line={scenes.s9.line} delaySec={0.4} size={58} weight={700} />
       <Caption line={scenes.s9.line2} delaySec={2.0} size={46} />
     </Text>

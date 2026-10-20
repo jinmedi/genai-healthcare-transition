@@ -94,8 +94,9 @@ public/fonts/         Noto Sans KR (OFL, 한글+라틴 서브셋 woff2)
 
 - 1000 × 1000, 30fps, 42초, 9개 씬, 0.4초 페이드 전환
 - 노트 톤: 크림색 종이 질감, 타자기 자막(프리텐다드), 형광펜 강조, 손글씨 메모(나눔손글씨 펜), 손그림 라인 일러스트
+- 사진 3곳(씬 2 아내 손, 씬 5·9 남편)은 `public/photos/` 의 파일을 폴라로이드 프레임으로 표시. 파일만 바꾸면 교체됨 (경로는 `src/wife/script.ts` 의 `photo`)
 - 대본은 `src/wife/script.ts` 한 곳에서 수정. `hl: true` 조각이 형광펜 강조
-- 구조: `src/wife/` — `script.ts` 대본 · `noteTheme.ts` 팔레트·폰트 · `components/` Paper·Caption·Handwriting·Doodles · `scenes.tsx` 씬 9개 · `WifePromo.tsx` 조립
+- 구조: `src/wife/` — `script.ts` 대본 · `noteTheme.ts` 팔레트·폰트 · `components/` Paper·Caption·Handwriting·Polaroid·Doodles · `scenes.tsx` 씬 9개 · `WifePromo.tsx` 조립
 
 ```bash
 npm run render:wife   # → out/clover-wife-promo-1x1.mp4
