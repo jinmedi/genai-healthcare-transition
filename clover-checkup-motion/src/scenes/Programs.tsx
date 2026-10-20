@@ -85,23 +85,6 @@ const ProgramsInner: React.FC = () => {
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <LeafBadge count={p.leaves} size={14} color={featured ? colors.lime : colors.cyan} />
-                    {featured ? (
-                      <div
-                        style={{
-                          marginLeft: "auto",
-                          padding: "4px 12px",
-                          borderRadius: 999,
-                          background: gradients.pinkYellow,
-                          color: colors.ink,
-                          fontSize: 16,
-                          fontWeight: 900,
-                          letterSpacing: "0.1em",
-                          boxShadow: `0 0 18px ${colors.magenta}`,
-                        }}
-                      >
-                        BEST
-                      </div>
-                    ) : null}
                   </div>
                   <div style={{ fontSize: 38, fontWeight: 900, letterSpacing: "-0.02em", marginTop: 10 }}>
                     {p.name}
