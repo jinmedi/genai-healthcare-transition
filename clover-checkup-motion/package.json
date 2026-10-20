@@ -4,7 +4,7 @@
   "description": "크로바내과 건강검진 홍보용 모션그래픽 (Remotion)",
   "scripts": {
     "dev": "remotion studio",
-    "render": "remotion render CheckupPromo out/clover-checkup-promo.mp4",
+    "render": "remotion render CheckupPromo out/clover-checkup-promo-1x1.mp4",
     "stills": "remotion render CheckupPromo out/frames --frames=80,200,400,620,800,1050 --image-format=png",
     "typecheck": "tsc --noEmit",
     "skills:update": "remotion skills update"

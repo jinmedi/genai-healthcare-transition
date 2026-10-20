@@ -16,13 +16,14 @@ const HookInner: React.FC = () => {
       <Background
         gradient={gradients.sunset}
         blobs={[
-          { color: colors.yellow, size: 900, x: 0.8, y: 0.15, seed: "h1" },
-          { color: colors.magenta, size: 1000, x: 0.1, y: 0.75, seed: "h2" },
-          { color: colors.white, size: 500, x: 0.5, y: 0.5, seed: "h3", opacity: 0.25 },
+          { color: colors.yellow, size: 700, x: 0.85, y: 0.15, seed: "h1" },
+          { color: colors.magenta, size: 800, x: 0.1, y: 0.8, seed: "h2" },
+          { color: colors.white, size: 420, x: 0.5, y: 0.5, seed: "h3", opacity: 0.25 },
         ]}
+        drift={90}
       />
-      <GlowRings color="rgba(255,255,255,.7)" size={700} count={4} period={3.2} spread={2.6} thickness={2} />
-      <Particles count={35} colors={[colors.white, colors.yellow]} seed="hook" speed={60} minSize={3} maxSize={9} />
+      <GlowRings color="rgba(255,255,255,.7)" size={520} count={4} period={3.2} spread={2.4} thickness={2} />
+      <Particles count={30} colors={[colors.white, colors.yellow]} seed="hook" speed={50} minSize={3} maxSize={8} />
 
       <div
         style={{
@@ -35,7 +36,7 @@ const HookInner: React.FC = () => {
           fontFamily: font,
           color: colors.white,
           textAlign: "center",
-          padding: "0 70px",
+          padding: "0 60px",
         }}
       >
         {hook.map((line, i) => {
@@ -44,7 +45,7 @@ const HookInner: React.FC = () => {
             <div key={i} style={{ overflow: "hidden", padding: "6px 0" }}>
               <div
                 style={{
-                  fontSize: 118,
+                  fontSize: 96,
                   fontWeight: 900,
                   letterSpacing: "-0.04em",
                   lineHeight: 1.15,
@@ -71,22 +72,22 @@ const HookInner: React.FC = () => {
 
         <div
           style={{
-            marginTop: 40,
-            height: 20,
-            borderRadius: 10,
+            marginTop: 30,
+            height: 16,
+            borderRadius: 8,
             background: gradients.limeCyan,
             boxShadow: `0 0 30px ${colors.lime}`,
-            width: 620 * progress(frame, fps, 1.4, 0.7),
+            width: 520 * progress(frame, fps, 1.4, 0.7),
           }}
         />
 
         <div
           style={{
-            marginTop: 90,
-            fontSize: 40,
+            marginTop: 70,
+            fontSize: 30,
             fontWeight: 700,
             letterSpacing: "0.06em",
-            padding: "16px 40px",
+            padding: "12px 32px",
             borderRadius: 999,
             background: "rgba(255,255,255,.18)",
             border: "2px solid rgba(255,255,255,.5)",

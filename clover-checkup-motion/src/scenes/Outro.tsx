@@ -26,12 +26,13 @@ const OutroInner: React.FC = () => {
       <Background
         gradient={gradients.candy}
         blobs={[
-          { color: colors.cyan, size: 900, x: 0.1, y: 0.15, seed: "o1" },
-          { color: colors.yellow, size: 900, x: 0.9, y: 0.4, seed: "o2" },
-          { color: colors.lime, size: 700, x: 0.5, y: 0.95, seed: "o3", opacity: 0.6 },
+          { color: colors.cyan, size: 700, x: 0.1, y: 0.15, seed: "o1" },
+          { color: colors.yellow, size: 700, x: 0.9, y: 0.45, seed: "o2" },
+          { color: colors.lime, size: 520, x: 0.5, y: 1.0, seed: "o3", opacity: 0.6 },
         ]}
+        drift={90}
       />
-      <Confetti colors={[colors.lime, colors.cyan, colors.yellow, colors.white, colors.magenta]} count={80} />
+      <Confetti colors={[colors.lime, colors.cyan, colors.yellow, colors.white, colors.magenta]} count={60} speed={200} />
 
       <div
         style={{
@@ -44,18 +45,18 @@ const OutroInner: React.FC = () => {
           fontFamily: font,
           color: colors.white,
           textAlign: "center",
-          padding: "0 70px",
+          padding: "0 60px",
         }}
       >
-        <div style={{ position: "relative", width: 260, height: 260, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <GlowRings color={colors.lime} size={200} period={2.2} spread={2.2} delaySec={0.5} />
-          <Clover size={170} delaySec={0.1} glow={colors.lime} />
+        <div style={{ position: "relative", width: 180, height: 180, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <GlowRings color={colors.lime} size={140} period={2.2} spread={2.2} delaySec={0.5} />
+          <Clover size={120} delaySec={0.1} glow={colors.lime} />
         </div>
 
         <div
           style={{
-            marginTop: 30,
-            fontSize: 62,
+            marginTop: 16,
+            fontSize: 44,
             fontWeight: 900,
             letterSpacing: "-0.03em",
             lineHeight: 1.25,
@@ -69,8 +70,8 @@ const OutroInner: React.FC = () => {
         </div>
         <div
           style={{
-            marginTop: 16,
-            fontSize: 34,
+            marginTop: 10,
+            fontSize: 25,
             fontWeight: 500,
             color: "rgba(255,255,255,.85)",
             ...fadeUp(frame, fps, 0.9, 0.6, 30),
@@ -79,31 +80,30 @@ const OutroInner: React.FC = () => {
           {clinic.closingSub}
         </div>
 
-        <div style={{ position: "relative", marginTop: 70 }}>
-          <GlowRings color={colors.yellow} size={520} count={2} period={2.6} spread={1.6} thickness={2} delaySec={1.6} />
+        <div style={{ position: "relative", marginTop: 40 }}>
+          <GlowRings color={colors.yellow} size={380} count={2} period={2.6} spread={1.6} thickness={2} delaySec={1.6} />
           <div
             style={{
               position: "relative",
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
-              gap: 14,
+              gap: 22,
               background: "rgba(255,255,255,.14)",
               border: "2px solid rgba(255,255,255,.5)",
               backdropFilter: "blur(18px)",
-              borderRadius: 48,
-              padding: "30px 60px 36px",
-              boxShadow: `0 0 70px ${colors.yellow}88, 0 30px 70px rgba(0,0,0,.3)`,
+              borderRadius: 40,
+              padding: "18px 40px 18px 28px",
+              boxShadow: `0 0 60px ${colors.yellow}88, 0 24px 60px rgba(0,0,0,.3)`,
               ...popIn(frame, fps, 1.3),
               scale: String(Number(popIn(frame, fps, 1.3).scale ?? 1) * pulse),
             }}
           >
             <div
               style={{
-                fontSize: 28,
+                fontSize: 22,
                 fontWeight: 900,
                 letterSpacing: "0.14em",
-                padding: "8px 22px",
+                padding: "7px 16px",
                 borderRadius: 999,
                 background: gradients.pinkYellow,
                 color: colors.ink,
@@ -114,7 +114,7 @@ const OutroInner: React.FC = () => {
             <ShimmerText
               colors={[colors.white, colors.yellow]}
               period={2}
-              style={{ fontSize: 104, fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.1 }}
+              style={{ fontSize: 76, fontWeight: 900, letterSpacing: "-0.02em", lineHeight: 1.1 }}
             >
               {clinic.phone}
             </ShimmerText>
@@ -123,8 +123,8 @@ const OutroInner: React.FC = () => {
 
         <div
           style={{
-            marginTop: 70,
-            fontSize: 40,
+            marginTop: 44,
+            fontSize: 30,
             fontWeight: 700,
             letterSpacing: "0.08em",
             ...fadeUp(frame, fps, 1.9, 0.6, 20),

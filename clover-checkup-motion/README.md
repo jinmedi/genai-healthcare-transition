@@ -3,7 +3,8 @@
 [Remotion](https://www.remotion.dev/)으로 만든 크로바내과 건강검진센터 홍보 영상입니다.
 영상의 글자·움직임·타이밍이 전부 코드라서, 문구를 고치고 다시 렌더하면 새 영상이 나옵니다.
 
-- 해상도: 1080 × 1920 (9:16 세로, 인스타그램 릴스·쇼츠·키오스크용), 30fps, 37초
+- 해상도: 1000 × 1000 (1:1 정사각형, 인스타그램 피드·카카오 채널용), 30fps, 37초
+- 이전 버전: 1920×1080 가로, 1080×1920 세로 레이아웃은 git 이력에 남아 있습니다
 - 폰트: Noto Sans KR (프로젝트에 번들, 네트워크 없이 렌더)
 - 색상: 보라·코랄·시안·라임 계열의 선명한 그라데이션 팔레트 (`src/theme.ts`)
 
@@ -57,7 +58,7 @@ Studio에서 장면별 컴포지션(`Scenes` 폴더)을 따로 열어 다듬을 
 ## MP4 렌더
 
 ```bash
-npm run render     # → out/clover-checkup-promo.mp4
+npm run render     # → out/clover-checkup-promo-1x1.mp4
 npm run stills     # 장면별 스틸 → out/frames/element-XXXX.png
 ```
 
@@ -96,4 +97,4 @@ public/fonts/         Noto Sans KR (OFL, 한글+라틴 서브셋 woff2)
 
 - 배경음악·효과음·내레이션 추가 (`@remotion/media`)
 - 장비 사진(내시경·CO₂ 주입기) 이미지 삽입 (`public/` + `<CanvasImage>`)
-- 16:9 가로(대기실 TV) 버전 컴포지션 추가
+- 16:9 가로(대기실 TV), 9:16 세로(릴스) 버전을 같은 소스에서 레이아웃 분기로 함께 유지

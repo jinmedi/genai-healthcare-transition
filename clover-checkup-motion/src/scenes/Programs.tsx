@@ -18,12 +18,13 @@ const ProgramsInner: React.FC = () => {
       <Background
         gradient={gradients.ocean}
         blobs={[
-          { color: colors.cyan, size: 900, x: 0.9, y: 0.1, seed: "p1" },
-          { color: colors.lime, size: 800, x: 0.1, y: 0.55, seed: "p2", opacity: 0.6 },
-          { color: colors.purple, size: 900, x: 0.7, y: 0.95, seed: "p3" },
+          { color: colors.cyan, size: 700, x: 0.9, y: 0.1, seed: "p1" },
+          { color: colors.lime, size: 600, x: 0.1, y: 0.6, seed: "p2", opacity: 0.6 },
+          { color: colors.purple, size: 700, x: 0.7, y: 1.0, seed: "p3" },
         ]}
+        drift={90}
       />
-      <Particles count={40} colors={[colors.cyan, colors.lime, colors.white]} seed="prog" speed={30} />
+      <Particles count={30} colors={[colors.cyan, colors.lime, colors.white]} seed="prog" speed={25} minSize={3} maxSize={9} />
 
       <div
         style={{
@@ -35,12 +36,12 @@ const ProgramsInner: React.FC = () => {
           justifyContent: "center",
           fontFamily: font,
           color: colors.white,
-          padding: "0 70px",
+          padding: "0 50px",
         }}
       >
         <div
           style={{
-            fontSize: 26,
+            fontSize: 20,
             fontWeight: 900,
             letterSpacing: "0.3em",
             color: colors.cyan,
@@ -52,9 +53,9 @@ const ProgramsInner: React.FC = () => {
         <ShimmerText
           colors={[colors.white, colors.lime]}
           style={{
-            marginTop: 10,
-            marginBottom: 44,
-            fontSize: 92,
+            marginTop: 6,
+            marginBottom: 30,
+            fontSize: 72,
             fontWeight: 900,
             letterSpacing: "-0.03em",
             ...fadeUp(frame, fps, 0.25),
@@ -63,73 +64,79 @@ const ProgramsInner: React.FC = () => {
           종합검진 프로그램
         </ShimmerText>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 26, width: "100%" }}>
+        <div style={{ display: "flex", gap: 18, width: "100%", alignItems: "stretch" }}>
           {programs.map((p, i) => {
-            const delay = 0.7 + i * 0.45;
+            const delay = 0.7 + i * 0.35;
             const featured = p.featured === true;
             return (
-              <div key={p.name} style={{ ...popIn(frame, fps, delay, 0.7) }}>
+              <div key={p.name} style={{ flex: 1, display: "flex", ...popIn(frame, fps, delay, 0.7) }}>
                 <GlassCard
                   glowBorder={featured ? gradients.limeCyan : undefined}
                   glowColor={featured ? colors.lime : undefined}
-                  padding="30px 38px 26px"
-                  innerStyle={featured ? { background: "rgba(10, 40, 60, .55)" } : undefined}
+                  padding="22px 22px 18px"
+                  radius={28}
+                  style={{ flex: 1, display: "flex" }}
+                  innerStyle={{
+                    flex: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    ...(featured ? { background: "rgba(10, 40, 60, .55)" } : {}),
+                  }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-                    <LeafBadge count={p.leaves} size={24} color={featured ? colors.lime : colors.cyan} />
-                    <div style={{ fontSize: 54, fontWeight: 900, letterSpacing: "-0.02em", marginLeft: 6 }}>
-                      {p.name}
-                    </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <LeafBadge count={p.leaves} size={14} color={featured ? colors.lime : colors.cyan} />
                     {featured ? (
                       <div
                         style={{
                           marginLeft: "auto",
-                          padding: "8px 18px",
+                          padding: "4px 12px",
                           borderRadius: 999,
                           background: gradients.pinkYellow,
                           color: colors.ink,
-                          fontSize: 24,
+                          fontSize: 16,
                           fontWeight: 900,
                           letterSpacing: "0.1em",
-                          boxShadow: `0 0 24px ${colors.magenta}`,
+                          boxShadow: `0 0 18px ${colors.magenta}`,
                         }}
                       >
                         BEST
                       </div>
                     ) : null}
                   </div>
-
+                  <div style={{ fontSize: 38, fontWeight: 900, letterSpacing: "-0.02em", marginTop: 10 }}>
+                    {p.name}
+                  </div>
                   <div
                     style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      columnGap: 20,
-                      rowGap: 10,
-                      marginTop: 20,
+                      height: 2,
+                      background: featured ? "rgba(200,255,61,.5)" : "rgba(255,255,255,.25)",
+                      margin: "12px 0 14px",
                     }}
-                  >
+                  />
+
+                  <div style={{ display: "flex", flexDirection: "column", gap: 7, flex: 1 }}>
                     {p.items.map((item, j) => (
                       <div
                         key={item}
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          gap: 12,
-                          fontSize: 27,
+                          gap: 9,
+                          fontSize: 21,
                           fontWeight: 500,
                           lineHeight: 1.3,
                           wordBreak: "keep-all",
-                          ...fadeUp(frame, fps, delay + 0.3 + j * 0.08, 0.45, 16),
+                          ...fadeUp(frame, fps, delay + 0.3 + j * 0.08, 0.45, 14),
                         }}
                       >
                         <div
                           style={{
-                            width: 10,
-                            height: 10,
-                            borderRadius: 5,
+                            width: 8,
+                            height: 8,
+                            borderRadius: 4,
                             flexShrink: 0,
                             background: featured ? colors.lime : colors.cyan,
-                            boxShadow: `0 0 10px ${featured ? colors.lime : colors.cyan}`,
+                            boxShadow: `0 0 8px ${featured ? colors.lime : colors.cyan}`,
                           }}
                         />
                         {item}
@@ -140,8 +147,8 @@ const ProgramsInner: React.FC = () => {
                   {p.note ? (
                     <div
                       style={{
-                        marginTop: 16,
-                        fontSize: 22,
+                        marginTop: 14,
+                        fontSize: 15,
                         lineHeight: 1.4,
                         color: "rgba(255,255,255,.75)",
                         wordBreak: "keep-all",
