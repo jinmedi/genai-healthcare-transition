@@ -16,6 +16,8 @@ const WIDTH = 1000;
 const HEIGHT = 1000;
 const WIDE_WIDTH = 1000;
 const WIDE_HEIGHT = 562;
+const TALL_WIDTH = 1000;
+const TALL_HEIGHT = 1056;
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -68,6 +70,24 @@ export const RemotionRoot: React.FC = () => {
         fps={FPS}
         width={WIDE_WIDTH}
         height={WIDE_HEIGHT}
+      />
+
+      {/* 1000×1056 버전: 정사각 레이아웃을 세로 중앙에 둔다 */}
+      <Composition
+        id="CheckupPromo1056"
+        component={CheckupVideo}
+        durationInFrames={totalDurationInFrames(FPS)}
+        fps={FPS}
+        width={TALL_WIDTH}
+        height={TALL_HEIGHT}
+      />
+      <Composition
+        id="WifePromo1056"
+        component={WifePromo}
+        durationInFrames={wifeDurationInFrames(FPS)}
+        fps={FPS}
+        width={TALL_WIDTH}
+        height={TALL_HEIGHT}
       />
 
       {/* 씬별로 따로 열어 다듬을 수 있는 연결 컴포지션 */}

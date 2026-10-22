@@ -23,11 +23,17 @@ import { useFormat } from "../format";
 /* 공통 레이아웃.
    정사각(1000×1000): 위쪽 절반 그림, 아래쪽 자막.
    가로(1000×562):   왼쪽 그림, 오른쪽 자막. */
-const Stage: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <Paper>
-    <div style={{ position: "absolute", inset: 0 }}>{children}</div>
-  </Paper>
-);
+const Stage: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { wide, width, height } = useFormat();
+  // 정사각 레이아웃은 1000×1000 기준 절대좌표라, 그보다 높은 캔버스(예: 1000×1056)에서는
+  // 1000px 높이 영역을 세로 중앙에 둔다. 가로 레이아웃은 캔버스 전체를 쓴다.
+  const inner = wide || height <= width ? { inset: 0 } : { left: 0, right: 0, top: (height - width) / 2, height: width };
+  return (
+    <Paper>
+      <div style={{ position: "absolute", ...inner }}>{children}</div>
+    </Paper>
+  );
+};
 
 /** 자막 영역. wide 면 오른쪽 절반에 세로 중앙, 아니면 top 위치에 가로 중앙 */
 const Text: React.FC<{ children: React.ReactNode; top?: number; wideLeft?: number }> = ({ children, top = 560, wideLeft = 470 }) => {

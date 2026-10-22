@@ -106,6 +106,9 @@ npm run concat        # 두 영상 합본 → out/clover-promo-combined-1x1.mp4 
 
 # 16:9 (1000×562) 버전
 npm run render:wide && npm run render:wife:wide && npm run concat:wide   # → out/*-16x9.mp4
+
+# 1000×1056 버전 (정사각 레이아웃을 세로 중앙에 배치)
+npm run render:1056 && npm run render:wife:1056 && npm run concat:1056   # → out/*-1000x1056.mp4
 ```
 
 폰트 추가: Pretendard (OFL, `public/fonts/Pretendard-OFL.txt`), Nanum Pen Script (OFL, `public/fonts/NanumPenScript-OFL.txt`). 둘 다 한글+라틴 서브셋 woff2.

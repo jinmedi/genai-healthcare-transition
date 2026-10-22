@@ -13,7 +13,10 @@
     "concat": "bash scripts/concat.sh",
     "render:wide": "remotion render CheckupPromoWide out/clover-checkup-promo-16x9.mp4",
     "render:wife:wide": "remotion render WifePromoWide out/clover-wife-promo-16x9.mp4",
-    "concat:wide": "bash scripts/concat.sh 16x9"
+    "concat:wide": "bash scripts/concat.sh 16x9",
+    "render:1056": "remotion render CheckupPromo1056 out/clover-checkup-promo-1000x1056.mp4",
+    "render:wife:1056": "remotion render WifePromo1056 out/clover-wife-promo-1000x1056.mp4",
+    "concat:1056": "bash scripts/concat.sh 1000x1056"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.536",
