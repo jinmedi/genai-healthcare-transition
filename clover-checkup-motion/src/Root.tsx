@@ -14,6 +14,8 @@ import { SCENE_SECONDS as WIFE_SECONDS } from "./wife/script";
 const FPS = 30;
 const WIDTH = 1000;
 const HEIGHT = 1000;
+const WIDE_WIDTH = 1000;
+const WIDE_HEIGHT = 562;
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -49,6 +51,24 @@ export const RemotionRoot: React.FC = () => {
           />
         ))}
       </Folder>
+
+      {/* 가로(16:9, 1000×562) 버전: 같은 씬 코드가 비율을 읽어 가로 레이아웃으로 그린다 */}
+      <Composition
+        id="CheckupPromoWide"
+        component={CheckupVideo}
+        durationInFrames={totalDurationInFrames(FPS)}
+        fps={FPS}
+        width={WIDE_WIDTH}
+        height={WIDE_HEIGHT}
+      />
+      <Composition
+        id="WifePromoWide"
+        component={WifePromo}
+        durationInFrames={wifeDurationInFrames(FPS)}
+        fps={FPS}
+        width={WIDE_WIDTH}
+        height={WIDE_HEIGHT}
+      />
 
       {/* 씬별로 따로 열어 다듬을 수 있는 연결 컴포지션 */}
       <Folder name="Scenes">

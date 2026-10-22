@@ -6,10 +6,12 @@ import { GlowRings } from "../effects/GlowRings";
 import { fadeUp, progress } from "../anim";
 import { colors, font, gradients } from "../theme";
 import { hook, clinic } from "../content";
+import { useFormat } from "../format";
 
 const HookInner: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const { wide } = useFormat();
 
   return (
     <>
@@ -22,7 +24,7 @@ const HookInner: React.FC = () => {
         ]}
         drift={90}
       />
-      <GlowRings color="rgba(255,255,255,.7)" size={520} count={4} period={3.2} spread={2.4} thickness={2} />
+      <GlowRings color="rgba(255,255,255,.7)" size={wide ? 380 : 520} count={4} period={3.2} spread={2.4} thickness={2} />
       <Particles count={30} colors={[colors.white, colors.yellow]} seed="hook" speed={50} minSize={3} maxSize={8} />
 
       <div
@@ -42,10 +44,10 @@ const HookInner: React.FC = () => {
         {hook.map((line, i) => {
           const start = (0.3 + i * 0.4) * fps;
           return (
-            <div key={i} style={{ overflow: "hidden", padding: "6px 0" }}>
+            <div key={i} style={{ overflow: "hidden", padding: "4px 0" }}>
               <div
                 style={{
-                  fontSize: 96,
+                  fontSize: wide ? 70 : 96,
                   fontWeight: 900,
                   letterSpacing: "-0.04em",
                   lineHeight: 1.15,
@@ -72,22 +74,22 @@ const HookInner: React.FC = () => {
 
         <div
           style={{
-            marginTop: 30,
-            height: 16,
+            marginTop: wide ? 20 : 30,
+            height: wide ? 12 : 16,
             borderRadius: 8,
             background: gradients.limeCyan,
             boxShadow: `0 0 30px ${colors.lime}`,
-            width: 520 * progress(frame, fps, 1.4, 0.7),
+            width: (wide ? 420 : 520) * progress(frame, fps, 1.4, 0.7),
           }}
         />
 
         <div
           style={{
-            marginTop: 70,
-            fontSize: 30,
+            marginTop: wide ? 40 : 70,
+            fontSize: wide ? 24 : 30,
             fontWeight: 700,
             letterSpacing: "0.06em",
-            padding: "12px 32px",
+            padding: wide ? "9px 26px" : "12px 32px",
             borderRadius: 999,
             background: "rgba(255,255,255,.18)",
             border: "2px solid rgba(255,255,255,.5)",

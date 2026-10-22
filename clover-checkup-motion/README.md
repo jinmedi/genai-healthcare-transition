@@ -3,7 +3,8 @@
 [Remotion](https://www.remotion.dev/)으로 만든 크로바내과 건강검진센터 홍보 영상입니다.
 영상의 글자·움직임·타이밍이 전부 코드라서, 문구를 고치고 다시 렌더하면 새 영상이 나옵니다.
 
-- 해상도: 1000 × 1000 (1:1 정사각형, 인스타그램 피드·카카오 채널용), 30fps, 37초
+- 해상도: 1000 × 1000 (1:1, 인스타그램 피드·카카오 채널용)과 1000 × 562 (16:9, 대기실 TV·유튜브용), 30fps, 37초
+- 두 비율은 같은 씬 코드를 공유하고, `src/format.ts` 의 `useFormat()` 으로 비율을 읽어 레이아웃만 바꿉니다 (`CheckupPromo` / `CheckupPromoWide`)
 - 이전 버전: 1920×1080 가로, 1080×1920 세로 레이아웃은 git 이력에 남아 있습니다
 - 폰트: Noto Sans KR (프로젝트에 번들, 네트워크 없이 렌더)
 - 색상: 보라·코랄·시안·라임 계열의 선명한 그라데이션 팔레트 (`src/theme.ts`)
@@ -92,7 +93,7 @@ public/fonts/         Noto Sans KR (OFL, 한글+라틴 서브셋 woff2)
 같은 저장소 안의 두 번째 영상입니다. 남편이 1인칭으로 아내(정지현 대표원장)를 자랑하는 고백 자막형이고, 원내 대기실 상영용입니다.
 기획안: https://claude.ai/code/artifact/497645ee-9e48-497f-acdb-26f5c3ea431c
 
-- 1000 × 1000, 30fps, 42초, 9개 씬, 0.4초 페이드 전환
+- 1000 × 1000 과 1000 × 562 (`WifePromo` / `WifePromoWide`), 30fps, 42초, 9개 씬, 0.4초 페이드 전환
 - 노트 톤: 크림색 종이 질감, 타자기 자막(프리텐다드), 형광펜 강조, 손글씨 메모(나눔손글씨 펜), 손그림 라인 일러스트
 - 사진 3곳(씬 2 아내 손, 씬 5·9 남편)은 `public/photos/` 의 파일을 폴라로이드 프레임으로 표시. 파일만 바꾸면 교체됨 (경로는 `src/wife/script.ts` 의 `photo`)
 - 대본은 `src/wife/script.ts` 한 곳에서 수정. `hl: true` 조각이 형광펜 강조
@@ -102,6 +103,9 @@ public/fonts/         Noto Sans KR (OFL, 한글+라틴 서브셋 woff2)
 npm run render:wife   # → out/clover-wife-promo-1x1.mp4
 npm run stills:wife   # 씬별 스틸 → out/wife/
 npm run concat        # 두 영상 합본 → out/clover-promo-combined-1x1.mp4 (79초, 재인코딩 없음)
+
+# 16:9 (1000×562) 버전
+npm run render:wide && npm run render:wife:wide && npm run concat:wide   # → out/*-16x9.mp4
 ```
 
 폰트 추가: Pretendard (OFL, `public/fonts/Pretendard-OFL.txt`), Nanum Pen Script (OFL, `public/fonts/NanumPenScript-OFL.txt`). 둘 다 한글+라틴 서브셋 woff2.

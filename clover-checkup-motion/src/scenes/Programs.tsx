@@ -8,10 +8,14 @@ import { ShimmerText } from "../effects/ShimmerText";
 import { fadeUp, popIn } from "../anim";
 import { colors, font, gradients } from "../theme";
 import { programs } from "../content";
+import { useFormat } from "../format";
 
 const ProgramsInner: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const { wide } = useFormat();
+  // 가로 비율에서는 모든 치수를 줄인다
+  const k = wide ? 0.72 : 1;
 
   return (
     <>
@@ -36,12 +40,12 @@ const ProgramsInner: React.FC = () => {
           justifyContent: "center",
           fontFamily: font,
           color: colors.white,
-          padding: "0 50px",
+          padding: wide ? "0 40px" : "0 50px",
         }}
       >
         <div
           style={{
-            fontSize: 20,
+            fontSize: 20 * k,
             fontWeight: 900,
             letterSpacing: "0.3em",
             color: colors.cyan,
@@ -53,9 +57,9 @@ const ProgramsInner: React.FC = () => {
         <ShimmerText
           colors={[colors.white, colors.lime]}
           style={{
-            marginTop: 6,
-            marginBottom: 30,
-            fontSize: 72,
+            marginTop: 4,
+            marginBottom: wide ? 18 : 30,
+            fontSize: 72 * k,
             fontWeight: 900,
             letterSpacing: "-0.03em",
             ...fadeUp(frame, fps, 0.25),
@@ -64,7 +68,7 @@ const ProgramsInner: React.FC = () => {
           종합검진 프로그램
         </ShimmerText>
 
-        <div style={{ display: "flex", gap: 18, width: "100%", alignItems: "stretch" }}>
+        <div style={{ display: "flex", gap: wide ? 16 : 18, width: "100%", alignItems: "stretch" }}>
           {programs.map((p, i) => {
             const delay = 0.7 + i * 0.35;
             const featured = p.featured === true;
@@ -73,8 +77,8 @@ const ProgramsInner: React.FC = () => {
                 <GlassCard
                   glowBorder={featured ? gradients.limeCyan : undefined}
                   glowColor={featured ? colors.lime : undefined}
-                  padding="22px 22px 18px"
-                  radius={28}
+                  padding={wide ? "14px 18px 12px" : "22px 22px 18px"}
+                  radius={wide ? 22 : 28}
                   style={{ flex: 1, display: "flex" }}
                   innerStyle={{
                     flex: 1,
@@ -84,20 +88,20 @@ const ProgramsInner: React.FC = () => {
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <LeafBadge count={p.leaves} size={14} color={featured ? colors.lime : colors.cyan} />
+                    <LeafBadge count={p.leaves} size={14 * k} color={featured ? colors.lime : colors.cyan} />
                   </div>
-                  <div style={{ fontSize: 38, fontWeight: 900, letterSpacing: "-0.02em", marginTop: 10 }}>
+                  <div style={{ fontSize: 38 * k, fontWeight: 900, letterSpacing: "-0.02em", marginTop: wide ? 6 : 10 }}>
                     {p.name}
                   </div>
                   <div
                     style={{
                       height: 2,
                       background: featured ? "rgba(200,255,61,.5)" : "rgba(255,255,255,.25)",
-                      margin: "12px 0 14px",
+                      margin: wide ? "8px 0 10px" : "12px 0 14px",
                     }}
                   />
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: 7, flex: 1 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: wide ? 4 : 7, flex: 1 }}>
                     {p.items.map((item, j) => (
                       <div
                         key={item}
@@ -105,7 +109,7 @@ const ProgramsInner: React.FC = () => {
                           display: "flex",
                           alignItems: "center",
                           gap: 9,
-                          fontSize: 21,
+                          fontSize: wide ? 17 : 21,
                           fontWeight: 500,
                           lineHeight: 1.3,
                           wordBreak: "keep-all",
@@ -114,8 +118,8 @@ const ProgramsInner: React.FC = () => {
                       >
                         <div
                           style={{
-                            width: 8,
-                            height: 8,
+                            width: 8 * k,
+                            height: 8 * k,
                             borderRadius: 4,
                             flexShrink: 0,
                             background: featured ? colors.lime : colors.cyan,
@@ -130,8 +134,8 @@ const ProgramsInner: React.FC = () => {
                   {p.note ? (
                     <div
                       style={{
-                        marginTop: 14,
-                        fontSize: 15,
+                        marginTop: wide ? 10 : 14,
+                        fontSize: wide ? 12 : 15,
                         lineHeight: 1.4,
                         color: "rgba(255,255,255,.75)",
                         wordBreak: "keep-all",
