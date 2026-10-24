@@ -90,6 +90,16 @@ export const RemotionRoot: React.FC = () => {
         height={TALL_HEIGHT}
       />
 
+      {/* 홈페이지 게시용(web) 변형: 비교·과장·효과 보장 표현을 뺀 문구. 세 비율 모두 제공 */}
+      <Folder name="Web">
+        <Composition id="CheckupPromoWeb" component={CheckupVideo} durationInFrames={totalDurationInFrames(FPS)} fps={FPS} width={WIDTH} height={HEIGHT} defaultProps={{ variant: "web" }} />
+        <Composition id="WifePromoWeb" component={WifePromo} durationInFrames={wifeDurationInFrames(FPS)} fps={FPS} width={WIDTH} height={HEIGHT} defaultProps={{ variant: "web" }} />
+        <Composition id="CheckupPromoWebWide" component={CheckupVideo} durationInFrames={totalDurationInFrames(FPS)} fps={FPS} width={WIDE_WIDTH} height={WIDE_HEIGHT} defaultProps={{ variant: "web" }} />
+        <Composition id="WifePromoWebWide" component={WifePromo} durationInFrames={wifeDurationInFrames(FPS)} fps={FPS} width={WIDE_WIDTH} height={WIDE_HEIGHT} defaultProps={{ variant: "web" }} />
+        <Composition id="CheckupPromoWeb1056" component={CheckupVideo} durationInFrames={totalDurationInFrames(FPS)} fps={FPS} width={TALL_WIDTH} height={TALL_HEIGHT} defaultProps={{ variant: "web" }} />
+        <Composition id="WifePromoWeb1056" component={WifePromo} durationInFrames={wifeDurationInFrames(FPS)} fps={FPS} width={TALL_WIDTH} height={TALL_HEIGHT} defaultProps={{ variant: "web" }} />
+      </Folder>
+
       {/* 씬별로 따로 열어 다듬을 수 있는 연결 컴포지션 */}
       <Folder name="Scenes">
         <Composition id="Intro" component={Intro} durationInFrames={SCENE_SECONDS.intro * FPS} fps={FPS} width={WIDTH} height={HEIGHT} />

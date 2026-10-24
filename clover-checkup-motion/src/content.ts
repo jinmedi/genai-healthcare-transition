@@ -108,3 +108,25 @@ export const equipment = {
     },
   ],
 };
+
+// ---------------------------------------------------------------------------
+// 홈페이지 게시용(web) 문구. 의료광고 기준으로 비교("대학병원급"), 최상급("최고", "최첨단"),
+// 효과 보장("정확한 검진", "통증이 적고") 표현을 사실 서술로 바꾼다.
+// ---------------------------------------------------------------------------
+export const clinicWeb = {
+  ...clinic,
+  legalName: "크로바내과의원",
+  footer: "크로바내과의원 · 예약 문의 044-863-7975",
+};
+
+export const equipmentWeb: typeof equipment = {
+  title: "Full HD 위 · 대장 내시경 도입",
+  subtitle: "고화질 영상과 특수광 관찰 기능을 갖춘 장비입니다",
+  points: [
+    { icon: "🔍", title: "Full HD 고화질 내시경", desc: "고화질 영상으로 병변을 관찰합니다" },
+    { icon: "🎯", title: "특수광 영상 기능 BLI · LCI", desc: "병변 관찰을 돕는 특수광 영상 기능" },
+    { icon: "💨", title: "CO₂ 주입기", desc: "검사 시 공기 대신 CO₂ 가스를 사용합니다" },
+  ],
+};
+
+export const equipmentChip = { internal: "PREMIUM ENDOSCOPY", web: "ENDOSCOPY" } as const;

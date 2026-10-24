@@ -17,8 +17,17 @@ import {
   usePop,
 } from "./components/Doodles";
 import { bodyFont, note } from "./noteTheme";
-import { clinic, scenes } from "./script";
+import { clinic as clinicInternal, clinicWeb, scenes as scenesInternal, scenesWeb } from "./script";
 import { useFormat } from "../format";
+import { useVariant } from "../variant";
+
+/** 변형에 맞는 대본·병원 정보 */
+const useScript = () => {
+  const variant = useVariant();
+  return variant === "web"
+    ? { variant, scenes: scenesWeb, clinic: clinicWeb }
+    : { variant, scenes: scenesInternal, clinic: clinicInternal as typeof clinicInternal & { footer?: string } };
+};
 
 /* 공통 레이아웃.
    정사각(1000×1000): 위쪽 절반 그림, 아래쪽 자막.
@@ -83,6 +92,7 @@ const Pop: React.FC<{ delaySec: number; children: React.ReactNode; style?: React
 
 /* ---------- 씬 1: 제 아내 자랑 좀 할게요 ---------- */
 const W1Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const { wide } = useFormat();
   return (
     <Stage>
@@ -104,6 +114,7 @@ export const W1 = Interactive.create({ Component: W1Inner, layout: "absolute-fil
 
 /* ---------- 씬 2: 손이 참 좋아요 ---------- */
 const W2Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const { wide } = useFormat();
   return (
     <Stage>
@@ -138,6 +149,7 @@ export const W2 = Interactive.create({ Component: W2Inner, layout: "absolute-fil
 
 /* ---------- 씬 3: 동료들이 줄을 섰어요 ---------- */
 const W3Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const { wide } = useFormat();
@@ -145,6 +157,38 @@ const W3Inner: React.FC = () => {
   const door = usePop(0.4, 0.5);
   const count = 8;
   const k = wide ? 0.66 : 1; // 가로에서는 줄 전체를 줄여 위쪽 띠에 넣는다
+  const { variant } = useScript();
+  if (variant === "web" && "years" in scenes.s3) {
+    // 홈페이지용: 경력 연수 카운터 (0 → 14) + 해마다 하나씩 붙는 클로버 표식
+    const years = scenes.s3.years;
+    const n = Math.round(interpolate(t, [0.4, 2.2], [0, years], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }));
+    return (
+      <Stage>
+        <Art top={60} height={440} wideWidth={440}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: wide ? 10 : 18 }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 10, fontFamily: bodyFont, color: note.ink }}>
+              <div style={{ fontSize: wide ? 150 : 200, fontWeight: 900, lineHeight: 1, letterSpacing: "-0.05em", color: note.cloverDark, fontVariantNumeric: "tabular-nums" }}>{n}</div>
+              <div style={{ fontSize: wide ? 40 : 52, fontWeight: 800 }}>{scenes.s3.yearsLabel}</div>
+            </div>
+            <div style={{ display: "flex", gap: wide ? 8 : 12, flexWrap: "wrap", justifyContent: "center", width: wide ? 380 : 560 }}>
+              {Array.from({ length: years }).map((_, i) => {
+                const d = 0.4 + (i / years) * 1.8;
+                const p = interpolate(t, [d, d + 0.3], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.34, 1.56, 0.64, 1) });
+                return (
+                  <div key={i} style={{ scale: String(p), opacity: Math.min(1, p * 2) }}>
+                    <CloverDoodle size={wide ? 28 : 36} delaySec={0} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </Art>
+        <Text top={580} wideLeft={480}>
+          <Caption line={scenes.s3.line} delaySec={0.3} size={wide ? 40 : 52} weight={600} />
+        </Text>
+      </Stage>
+    );
+  }
   return (
     <Stage>
       <div style={{ position: "absolute", left: 0, top: wide ? 30 : 70, width: 1000, height: 420 * k, scale: String(k), transformOrigin: "0 0" }}>
@@ -213,6 +257,7 @@ export const W3 = Interactive.create({ Component: W3Inner, layout: "absolute-fil
 
 /* ---------- 씬 4: 꼼꼼히 ---------- */
 const W4Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const { wide } = useFormat();
   const k = wide ? 0.78 : 1;
   return (
@@ -237,6 +282,7 @@ export const W4 = Interactive.create({ Component: W4Inner, layout: "absolute-fil
 
 /* ---------- 씬 5: 저도 아내한테 받습니다 ---------- */
 const W5Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const { wide } = useFormat();
   return (
     <Stage>
@@ -279,6 +325,7 @@ export const W5 = Interactive.create({ Component: W5Inner, layout: "absolute-fil
 
 /* ---------- 씬 6: 세종에서 크로바내과 ---------- */
 const W6Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const { wide } = useFormat();
@@ -381,6 +428,7 @@ export const W6 = Interactive.create({ Component: W6Inner, layout: "absolute-fil
 
 /* ---------- 씬 7: 대학병원급 장비, CO₂ ---------- */
 const W7Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const { wide } = useFormat();
   const k = wide ? 0.62 : 1;
   return (
@@ -409,6 +457,7 @@ export const W7 = Interactive.create({ Component: W7Inner, layout: "absolute-fil
 
 /* ---------- 씬 8: 미리 예약부터 ---------- */
 const W8Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const { wide } = useFormat();
   return (
     <Stage>
@@ -449,6 +498,7 @@ export const W8 = Interactive.create({ Component: W8Inner, layout: "absolute-fil
 
 /* ---------- 씬 9: 아내 자랑이 좀 심했나요? ---------- */
 const W9Inner: React.FC = () => {
+  const { scenes, clinic } = useScript();
   const { wide } = useFormat();
   return (
     <Stage>
@@ -476,6 +526,24 @@ const W9Inner: React.FC = () => {
           {clinic.speaker}
         </Handwriting>
       </div>
+      {clinic.footer ? (
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: wide ? 10 : 40,
+            textAlign: "center",
+            fontFamily: bodyFont,
+            fontSize: wide ? 17 : 22,
+            fontWeight: 600,
+            letterSpacing: "0.04em",
+            color: note.inkSoft,
+          }}
+        >
+          {clinic.footer}
+        </div>
+      ) : null}
     </Stage>
   );
 };

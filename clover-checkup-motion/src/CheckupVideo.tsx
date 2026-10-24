@@ -12,6 +12,7 @@ import { Programs } from "./scenes/Programs";
 import { CustomTests } from "./scenes/CustomTests";
 import { Equipment } from "./scenes/Equipment";
 import { Outro } from "./scenes/Outro";
+import { VariantProvider, type Variant } from "./variant";
 
 /** 씬 길이(초). Root.tsx 의 durationInFrames 계산에도 사용된다. */
 export const SCENE_SECONDS = {
@@ -32,13 +33,14 @@ export const totalDurationInFrames = (fps: number): number => {
   return Math.round((scenes - transitions) * fps);
 };
 
-export const CheckupVideo: React.FC = () => {
+export const CheckupVideo: React.FC<{ variant?: Variant }> = ({ variant = "internal" }) => {
   const { fps, width, height } = useVideoConfig();
   const frames = Math.round(TRANSITION_SECONDS * fps);
   const linear = linearTiming({ durationInFrames: frames });
   const spring = springTiming({ config: { damping: 200 }, durationInFrames: frames });
 
   return (
+    <VariantProvider variant={variant}>
     <TransitionSeries>
       <TransitionSeries.Sequence name="인트로" durationInFrames={SCENE_SECONDS.intro * fps}>
         <Intro />
@@ -73,5 +75,6 @@ export const CheckupVideo: React.FC = () => {
         <div style={{ position: "absolute", inset: 0, background: "#1a0b3d" }} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
+    </VariantProvider>
   );
 };

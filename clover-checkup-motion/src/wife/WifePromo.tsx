@@ -5,6 +5,7 @@ import { fade } from "@remotion/transitions/fade";
 import { W1, W2, W3, W4, W5, W6, W7, W8, W9 } from "./scenes";
 import { FADE_SECONDS, SCENE_SECONDS } from "./script";
 import "./noteTheme";
+import { VariantProvider, type Variant } from "../variant";
 
 /** 전체 길이(프레임). 씬 합계 42초에 페이드 겹침을 더하고 빼면 그대로 42초. */
 export const wifeDurationInFrames = (fps: number): number =>
@@ -13,11 +14,12 @@ export const wifeDurationInFrames = (fps: number): number =>
 const SCENES = [W1, W2, W3, W4, W5, W6, W7, W8, W9];
 const NAMES = ["자랑 좀 할게요", "손이 좋아요", "줄을 섰어요", "꼼꼼히", "저도 받습니다", "크로바내과", "덜 아파요", "미리 예약", "심했나요?"];
 
-export const WifePromo: React.FC = () => {
+export const WifePromo: React.FC<{ variant?: Variant }> = ({ variant = "internal" }) => {
   const { fps } = useVideoConfig();
   const fadeFrames = Math.round(FADE_SECONDS * fps);
 
   return (
+    <VariantProvider variant={variant}>
     <TransitionSeries>
       {SCENES.map((Scene, i) => {
         const last = i === SCENES.length - 1;
@@ -35,5 +37,6 @@ export const WifePromo: React.FC = () => {
         );
       })}
     </TransitionSeries>
+    </VariantProvider>
   );
 };

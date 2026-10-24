@@ -84,3 +84,42 @@ export const scenes = {
 /** 씬 길이(초). 합계 42초. 전환(0.4초 페이드)은 마지막 씬을 제외하고 각 씬 뒤에 겹친다. */
 export const SCENE_SECONDS = [3.5, 4.5, 6, 5, 5, 5, 4, 5, 4] as const;
 export const FADE_SECONDS = 0.4;
+
+// ---------------------------------------------------------------------------
+// 홈페이지 게시용(web) 대본. 원내용과 다른 문장만 덮어쓴다.
+// - 3번: 과장·타인 추천 암시 → 경력 사실 ("14년 넘게")
+// - 8번: 비교("대학병원급") + 효과 보장("덜 아파요") 제거
+// - 9번 괄호: 환자 유인 표현 제거 / 10번: 전화번호
+// - 씬 2 사진 캡션 "아내 손" 제거 (실제 사진이 아닐 수 있어 거짓 표시 방지)
+// ---------------------------------------------------------------------------
+export const clinicWeb = {
+  ...clinic,
+  legalName: "크로바내과의원",
+  phone: "044-863-7975",
+  career: "내시경 검사 경력 14년 이상",
+  signature: "— 크로바내과의원",
+  footer: "크로바내과의원 · 예약 문의 044-863-7975",
+};
+
+export const scenesWeb = {
+  ...scenes,
+  s2: { ...scenes.s2, photoCaption: undefined as string | undefined },
+  s3: {
+    line: [{ t: "내시경 검사를 " }, { t: "14년 넘게", hl: true }, { t: " 해 왔어요." }] as Line,
+    years: 14,
+    yearsLabel: "년 넘게",
+    sign: scenes.s3.sign,
+  },
+  s7: {
+    line: [{ t: "장비도 " }, { t: "새로", hl: true }, { t: " 들여놓았어요." }] as Line,
+    note: "(공기 대신 CO₂를 쓰는 내시경이에요.)",
+    bubble: "CO₂",
+  },
+  s8: {
+    ...scenes.s8,
+    note: "(예약제로 운영해요.)",
+    desk: "예약 문의 044-863-7975",
+  },
+};
+
+export type Scenes = typeof scenes | typeof scenesWeb;

@@ -7,13 +7,16 @@ import { GlowRings } from "../effects/GlowRings";
 import { ShimmerText } from "../effects/ShimmerText";
 import { fadeUp, popIn, slideInX } from "../anim";
 import { colors, font, gradients } from "../theme";
-import { equipment } from "../content";
+import { equipment as equipmentInternal, equipmentWeb, equipmentChip } from "../content";
 import { useFormat } from "../format";
+import { useVariant } from "../variant";
 
 const EquipmentInner: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps, height } = useVideoConfig();
   const { wide } = useFormat();
+  const variant = useVariant();
+  const equipment = variant === "web" ? equipmentWeb : equipmentInternal;
   const t = frame / fps;
 
   return (
@@ -85,7 +88,7 @@ const EquipmentInner: React.FC = () => {
             ...popIn(frame, fps, 0.2),
           }}
         >
-          PREMIUM ENDOSCOPY
+          {equipmentChip[variant]}
         </div>
         <ShimmerText
           colors={[colors.white, colors.cyan]}
@@ -98,7 +101,7 @@ const EquipmentInner: React.FC = () => {
             ...fadeUp(frame, fps, 0.4),
           }}
         >
-          대학병원급 위 · 대장 내시경 도입
+          {equipment.title}
         </ShimmerText>
         <div
           style={{

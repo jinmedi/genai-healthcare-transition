@@ -7,13 +7,15 @@ import { GlowRings } from "../effects/GlowRings";
 import { ShimmerText } from "../effects/ShimmerText";
 import { fadeUp, popIn } from "../anim";
 import { colors, font, gradients } from "../theme";
-import { clinic } from "../content";
+import { clinic, clinicWeb } from "../content";
 import { useFormat } from "../format";
+import { useVariant } from "../variant";
 
 const OutroInner: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const { wide } = useFormat();
+  const variant = useVariant();
 
   // 전화번호 강조 펄스 (2.2초부터 3회)
   const pulse = interpolate(
@@ -142,6 +144,25 @@ const OutroInner: React.FC = () => {
           </div>
         )}
       </div>
+      {variant === "web" ? (
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: wide ? 22 : 44,
+            textAlign: "center",
+            fontFamily: font,
+            fontSize: wide ? 18 : 22,
+            fontWeight: 600,
+            letterSpacing: "0.04em",
+            color: "rgba(255,255,255,.85)",
+            ...fadeUp(frame, fps, 2.2, 0.6, 16),
+          }}
+        >
+          {clinicWeb.footer}
+        </div>
+      ) : null}
     </>
   );
 };

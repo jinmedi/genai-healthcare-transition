@@ -113,6 +113,27 @@ npm run render:1056 && npm run render:wife:1056 && npm run concat:1056   # → o
 
 폰트 추가: Pretendard (OFL, `public/fonts/Pretendard-OFL.txt`), Nanum Pen Script (OFL, `public/fonts/NanumPenScript-OFL.txt`). 둘 다 한글+라틴 서브셋 woff2.
 
+## 홈페이지 게시용(web) 변형
+
+원내 상영용 원본과 별도로, 의료광고 기준(의료법 제56조)에 맞춰 비교·과장·효과 보장 표현을 뺀 문구로 렌더하는 변형입니다.
+컴포지션 `Web` 폴더(`CheckupPromoWeb*`, `WifePromoWeb*`)에 세 비율이 모두 있고, 문구는 `src/content.ts` 의 `equipmentWeb`·`clinicWeb`, `src/wife/script.ts` 의 `scenesWeb`·`clinicWeb` 에서 수정합니다.
+
+| 위치 | 원내용 | 홈페이지용 |
+| --- | --- | --- |
+| 검진 안내 · 장비 씬 | PREMIUM ENDOSCOPY / 대학병원급 / 최고 사양 / 최첨단 / 발견율을 높이는 / 통증이 적고 | ENDOSCOPY / Full HD / 고화질 영상과 특수광 관찰 기능 / 고화질 / 병변 관찰을 돕는 / 공기 대신 CO₂ 가스를 사용 |
+| 검진 안내 · 예약 씬 | — | 하단에 "크로바내과의원 · 예약 문의 044-863-7975" |
+| 아내 자랑 3번 | 건양대병원 … 동료들이 줄을 섰어요 | 내시경 검사를 14년 넘게 해 왔어요 (카운터 연출) |
+| 아내 자랑 2번 사진 | 캡션 "아내 손" | 캡션 없음 |
+| 아내 자랑 6번 칩 | 건양대병원 근무 | 내시경 검사 경력 14년 이상 |
+| 아내 자랑 8번 | 대학병원급 … 확실히 덜 아파요 | 장비도 새로 들여놓았어요 (공기 대신 CO₂를 쓰는 내시경이에요) |
+| 아내 자랑 9·10번 | 좋은 날짜는 금방 마감 / 데스크로 문의 | 예약제로 운영해요 / 예약 문의 044-863-7975 |
+| 아내 자랑 12번 | — 크로바내과 | — 크로바내과의원 + 하단 기관 표기 |
+
+```bash
+npm run render:web:1056 && npm run render:wife:web:1056 && npm run concat:web:1056   # → out/*-web-1000x1056.mp4
+# 1:1, 16:9 도 render:web / render:wife:web / render:web:wide / render:wife:web:wide 로 가능
+```
+
 ## 라이선스 안내
 
 - Remotion은 개인 및 **3인 이하 회사**는 무료, 4인 이상 회사는 유료 라이선스가 필요합니다.
