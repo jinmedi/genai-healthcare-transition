@@ -10,6 +10,7 @@ import { Outro } from "./scenes/Outro";
 import { WifePromo, wifeDurationInFrames } from "./wife/WifePromo";
 import { W1, W2, W3, W4, W5, W6, W7, W8, W9 } from "./wife/scenes";
 import { SCENE_SECONDS as WIFE_SECONDS } from "./wife/script";
+import { IVPromo, ivDurationInFrames } from "./iv/IVPromo";
 
 const FPS = 30;
 const WIDTH = 1000;
@@ -89,6 +90,10 @@ export const RemotionRoot: React.FC = () => {
         width={TALL_WIDTH}
         height={TALL_HEIGHT}
       />
+
+      {/* 영상 3: 비급여 영양수액 안내 (원내용). 1000×1056 기본, 1:1 도 가능 */}
+      <Composition id="IVPromo1056" component={IVPromo} durationInFrames={ivDurationInFrames(FPS)} fps={FPS} width={TALL_WIDTH} height={TALL_HEIGHT} />
+      <Composition id="IVPromo" component={IVPromo} durationInFrames={ivDurationInFrames(FPS)} fps={FPS} width={WIDTH} height={HEIGHT} />
 
       {/* 홈페이지 게시용(web) 변형: 비교·과장·효과 보장 표현을 뺀 문구. 세 비율 모두 제공 */}
       <Folder name="Web">

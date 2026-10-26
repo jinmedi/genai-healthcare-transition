@@ -113,6 +113,20 @@ npm run render:1056 && npm run render:wife:1056 && npm run concat:1056   # → o
 
 폰트 추가: Pretendard (OFL, `public/fonts/Pretendard-OFL.txt`), Nanum Pen Script (OFL, `public/fonts/NanumPenScript-OFL.txt`). 둘 다 한글+라틴 서브셋 woff2.
 
+## 영상 3: 비급여 영양수액 안내 (`IVPromo`)
+
+원내 상영용. 비급여 영양수액 가격표의 항목·가격을 그대로 쓰고, 검진 영상의 네온 팔레트와 효과를 재사용합니다.
+
+- 1000 × 1056 (`IVPromo1056`) 과 1000 × 1000 (`IVPromo`), 30fps, 33초, 6개 씬
+- 씬: 인트로(수액 봉지에 액체가 차오름) → 이럴 때(회식·감기·배터리 1%) → 기본 비타민 수액 3종 → 컬러 수액 5종 → 아미노산·리피드 4종 → 안내("모든 수액은 원장님 진료 후 처방")
+- 수액 봉지 그림 `src/iv/components/IVBag.tsx`: 액체 차오름, 기포, 점적 방울 애니메이션
+- 항목·가격·문구는 `src/iv/content.ts` 에서 수정. 가격은 0부터 굴러 올라가는 카운터로 표시
+
+```bash
+npm run render:iv    # → out/clover-iv-promo-1000x1056.mp4
+npm run stills:iv    # 씬별 스틸 → out/iv/
+```
+
 ## 홈페이지 게시용(web) 변형
 
 원내 상영용 원본과 별도로, 의료광고 기준(의료법 제56조)에 맞춰 비교·과장·효과 보장 표현을 뺀 문구로 렌더하는 변형입니다.

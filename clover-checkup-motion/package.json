@@ -23,7 +23,9 @@
     "render:wife:web:wide": "remotion render WifePromoWebWide out/clover-wife-promo-web-16x9.mp4",
     "render:web:1056": "remotion render CheckupPromoWeb1056 out/clover-checkup-promo-web-1000x1056.mp4",
     "render:wife:web:1056": "remotion render WifePromoWeb1056 out/clover-wife-promo-web-1000x1056.mp4",
-    "concat:web:1056": "bash scripts/concat.sh web-1000x1056"
+    "concat:web:1056": "bash scripts/concat.sh web-1000x1056",
+    "render:iv": "remotion render IVPromo1056 out/clover-iv-promo-1000x1056.mp4",
+    "stills:iv": "remotion render IVPromo1056 out/iv --frames=100,250,460,680,900,1070 --image-format=png"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.536",
