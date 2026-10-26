@@ -1,0 +1,45 @@
+{
+  "name": "clover-checkup-motion",
+  "version": "0.1.0",
+  "description": "크로바내과 건강검진 홍보용 모션그래픽 (Remotion)",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render CheckupPromo out/clover-checkup-promo-1x1.mp4",
+    "stills": "remotion render CheckupPromo out/frames --frames=80,200,400,620,800,1050 --image-format=png",
+    "typecheck": "tsc --noEmit",
+    "skills:update": "remotion skills update",
+    "render:wife": "remotion render WifePromo out/clover-wife-promo-1x1.mp4",
+    "stills:wife": "remotion render WifePromo out/wife --frames=95,230,410,560,710,860,980,1130,1255 --image-format=png",
+    "concat": "bash scripts/concat.sh",
+    "render:wide": "remotion render CheckupPromoWide out/clover-checkup-promo-16x9.mp4",
+    "render:wife:wide": "remotion render WifePromoWide out/clover-wife-promo-16x9.mp4",
+    "concat:wide": "bash scripts/concat.sh 16x9",
+    "render:1056": "remotion render CheckupPromo1056 out/clover-checkup-promo-1000x1056.mp4",
+    "render:wife:1056": "remotion render WifePromo1056 out/clover-wife-promo-1000x1056.mp4",
+    "concat:1056": "bash scripts/concat.sh 1000x1056",
+    "render:web": "remotion render CheckupPromoWeb out/clover-checkup-promo-web-1x1.mp4",
+    "render:wife:web": "remotion render WifePromoWeb out/clover-wife-promo-web-1x1.mp4",
+    "render:web:wide": "remotion render CheckupPromoWebWide out/clover-checkup-promo-web-16x9.mp4",
+    "render:wife:web:wide": "remotion render WifePromoWebWide out/clover-wife-promo-web-16x9.mp4",
+    "render:web:1056": "remotion render CheckupPromoWeb1056 out/clover-checkup-promo-web-1000x1056.mp4",
+    "render:wife:web:1056": "remotion render WifePromoWeb1056 out/clover-wife-promo-web-1000x1056.mp4",
+    "concat:web:1056": "bash scripts/concat.sh web-1000x1056",
+    "render:iv": "remotion render IVPromo1056 out/clover-iv-promo-1000x1056.mp4",
+    "stills:iv": "remotion render IVPromo1056 out/iv --frames=100,250,460,680,900,1070 --image-format=png"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.536",
+    "@remotion/fonts": "4.0.536",
+    "@remotion/noise": "4.0.536",
+    "@remotion/transitions": "4.0.536",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.9.3"
+  },
+  "private": true
+}
