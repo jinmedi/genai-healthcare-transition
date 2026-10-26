@@ -276,9 +276,9 @@ const ColorsInner: React.FC = () => {
         <div style={{ marginTop: 6, marginBottom: 34, fontSize: 30, fontWeight: 500, color: "rgba(255,255,255,.85)", ...fadeUp(frame, fps, 0.45, 0.6, 30) }}>
           오늘 컨디션에 맞는 색을 고르세요
         </div>
-        <div style={{ display: "flex", gap: 14, width: "100%", justifyContent: "center" }}>
+        <div style={{ display: "flex", gap: 20, width: "100%", justifyContent: "center" }}>
           {colors5.map((it, i) => (
-            <BagCard key={it.name} item={it} delaySec={0.7 + i * 0.25} width={176} bagSize={170} nameSize={28} tagSize={16} priceSize={28} />
+            <BagCard key={it.name} item={it} delaySec={0.7 + i * 0.3} width={285} bagSize={230} nameSize={32} tagSize={18} priceSize={40} />
           ))}
         </div>
       </Center>

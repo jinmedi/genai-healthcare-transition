@@ -22,7 +22,7 @@ export const clinic = {
 export const intro = {
   kicker: "NUTRIENT IV THERAPY",
   title: "영양수액",
-  sub: "지친 하루, 수액 한 병으로 충전",
+  sub: "지친 하루, 수액으로 충전",
 };
 
 // 씬 2 훅: 이럴 때 (가볍게 과장 허용)
@@ -31,7 +31,7 @@ export const hooks = [
   { icon: "🤧", text: "감기 기운이 스멀스멀 올라올 때" },
   { icon: "🪫", text: "몸이 천근만근, 배터리 1%일 때" },
 ];
-export const hookLine = ["그럴 땐", "수액 한 병 어때요?"];
+export const hookLine = ["그럴 땐", "수액 어때요?"];
 
 // 씬 3 기본 비타민 수액 3종
 export const basic: IVItem[] = [
@@ -40,13 +40,11 @@ export const basic: IVItem[] = [
   { name: "말초신경대사 수액", tag: "신경 영양", price: 50000, color: "#a78bfa" },
 ];
 
-// 씬 4 컬러 수액 5종 (가격표의 색 이름 그대로)
+// 씬 4 컬러 수액 3종 (가격표의 색 이름 그대로. 오렌지·노랑은 제외)
 export const colors5: IVItem[] = [
   { name: "그린", tag: "숙취 · 피부", price: 40000, color: "#4ade80" },
   { name: "레드", tag: "피로회복", price: 60000, color: "#f43f5e" },
   { name: "다크블루", tag: "감기몸살", price: 60000, color: "#2563eb", textColor: "#ffffff" },
-  { name: "오렌지", tag: "다이어트", price: 60000, color: "#fb923c" },
-  { name: "노랑", tag: "혈액순환", price: 60000, color: "#facc15" },
 ];
 
 // 씬 5 아미노산 · 리피드
